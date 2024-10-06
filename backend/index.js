@@ -3,6 +3,8 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import dotenv from "dotenv";
 import connect from "./utilities/database.js";
+import userroute from "./routes/user_routes.js"
+import companyroute from "./routes/comapny_route.js"
 
 dotenv.config({});
 const app  = express();
@@ -17,6 +19,8 @@ const cross_origin = {
 app.use(cors(cross_origin));
 
 const PORT = process.env.PORT || 3000;
+app.use("/api/v1/user",userroute);
+app.use("/api/v1/company",companyroute);
 
 app.listen(PORT,()=>{
     connect();
