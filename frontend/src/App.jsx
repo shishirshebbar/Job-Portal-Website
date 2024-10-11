@@ -7,6 +7,7 @@ import Home from './components/Home'
 import Signup from './components/authorization/Signup'
 
 
+
 const approuter= createBrowserRouter([
   {
     path:'/',

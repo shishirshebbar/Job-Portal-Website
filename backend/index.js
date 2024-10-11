@@ -14,7 +14,7 @@ app.use(express.urlencoded({extended:true}));
 app.use(cookieParser());
 
 const cross_origin = {
-    origin:"http://localhost:5713",
+    origin:"http://localhost:5173",
     credentials : true
 }
 app.use(cors(cross_origin));
