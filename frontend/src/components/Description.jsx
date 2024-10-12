@@ -8,6 +8,7 @@ function Description() {
         <div className='flex flex-col gap-5 my-10'>
         <span className='px-4 py-2 rounded-full bg-gray-100 text-black font-medium'>No.1 Job Finding Website</span>
         <h1 className='text-3xl font-bold'>Search,Refer & Get Your Job</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do.</p>
         <div className='flex w-[40%] shadow-lg border-gray-200 pl-3 rounded-full items-center gap-4 mx-auto'>
             <input
             type="text"
