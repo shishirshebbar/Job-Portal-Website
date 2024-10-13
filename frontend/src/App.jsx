@@ -8,6 +8,7 @@ import Signup from './components/authorization/Signup'
 import Jobs from './components/Jobs'
 import Browse from './components/Browse'
 import ViewProfile from './components/ViewProfile'
+import JobDescription from './components/JobDescription'
 
 
 
@@ -27,7 +28,12 @@ const approuter= createBrowserRouter([
   {
     path:'/jobs',
     element:<Jobs/>
-  },{
+  },
+  {
+    path:"description/:id",
+    element:<JobDescription/>
+  },  
+  {
     path:'/browse',
     element:<Browse/>
 

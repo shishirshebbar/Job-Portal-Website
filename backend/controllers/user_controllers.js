@@ -105,6 +105,7 @@ export const logout = async(req,res)=>{
 export const  updateprofile = async(req,res)=>{
     try{
         const {fullname,email,phonenumber,biography,skills}= req.body;
+        console.log(fullname,email,phonenumber,biography,skills);
         const file = req.file;
         let skillslist;
         if(skills){
