@@ -9,7 +9,7 @@ import { toast } from 'sonner'
 import axios from 'axios'
 import { API_END_POINT } from '@/utilities/constants'
 import { useDispatch, useSelector } from 'react-redux'
-import { setloading } from '@/redux/authorizedslice'
+import { setloading, setuser } from '@/redux/authorizedslice'
 import store from '@/redux/store'
 import { Loader2 } from 'lucide-react'
 function Login() {
@@ -37,6 +37,7 @@ function Login() {
               },withCredentials:true,
           });
           if(res.data.success){
+              dispatch(setuser(res.data.user));
               navigate("/");
               toast.success(res.data.message);
               console.log(res.data.message)

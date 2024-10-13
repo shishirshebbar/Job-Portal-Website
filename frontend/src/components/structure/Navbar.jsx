@@ -4,8 +4,9 @@ import { Button } from '../ui/button'
 import { Avatar, AvatarFallback, AvatarImage } from '@radix-ui/react-avatar'
 import { LogOut,User2 } from 'lucide-react'
 import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 function Navbar() {
-    const user = false;
+    const {user} = useSelector(store=>store.auth)
   return (
     <div className='bg-white'>
         <div className='flex items-center justify-between mx-auto max-w-7xl h-16'>
@@ -29,15 +30,15 @@ function Navbar() {
                 </div>
             ):(<Popover>
                 <PopoverTrigger asChild>
-                <Avatar className="w-8 h-8 cursor-pointer">
-                <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+                <Avatar className="w-8 h-8  cursor-pointer">
+                <AvatarImage className ="rounded-full" src="https://github.com/shadcn.png" alt="@shadcn" />
                 
               </Avatar>
                 </PopoverTrigger>
                 <PopoverContent className='w-80 border border-white bg-white shadow-lg'>
                   <div className='flex gap-6 space-y-1'>
                 <Avatar className="w-10 h-10 cursor-pointer mt-2">
-                <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+                <AvatarImage className ="rounded-full" src="https://github.com/shadcn.png" alt="@shadcn" />
                 
               </Avatar>
              <div>
@@ -47,7 +48,7 @@ function Navbar() {
                   <div className='flex flex-col text-grey-900'>
                       <div className='flex w-fit items-center gap-2 cursor-pointer'>
                       <User2/>
-                      <Button variant= "link">View Profile</Button>
+                      <Button variant= "link"><Link to="/profile">View Profile</Link></Button>
                       
                       </div>
                       <div className='flex w-fit items-center gap-2 cursor-pointer'>

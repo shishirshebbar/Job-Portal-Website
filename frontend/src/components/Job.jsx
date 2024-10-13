@@ -3,12 +3,13 @@ import { Button } from './ui/button';
 import { Bookmark } from 'lucide-react';
 import { Avatar, AvatarImage } from './ui/avatar';
 import logo from '../assets/logo.jpg';
+import { Badge } from './ui/badge';
 
 function Job() {
   return (
     <div className='p-5 rounded-md shadow-xl bg-white border border-gray-200'>
       <div className='flex items-center justify-between'>
-        <p>1 day ago</p>
+        <p className='text-sm text-gray-900'>1 day ago</p>
         <Button variant="outline" className="rounded-full" size="icon">
           <Bookmark />
         </Button>
@@ -29,9 +30,24 @@ function Job() {
       
     
       <div className='mt-2'>
-        <h2 className="text-xl font-semibold">Job Title</h2> {/* Job title */}
-        <p className="text-gray-600">This is a brief description of the job role and responsibilities.</p> {/* Job description */}
+        <h1 className="text-lg font-bold my-2">Job Title</h1> 
+        <p className="text-gray-600 text-sm">This is a brief description of the job role and responsibilities.</p> {/* Job description */}
       </div>
+    <div className='flex items-center gap-3 mt-4'>
+                <Badge className={'text-red-900 font-bold'} variant="primary">10 Postions</Badge>
+                <Badge className={'text-blue-900 font-bold'}  variant="primary">Part time</Badge>
+                <Badge className={'text-violet-900 font-bold'}  variant="primary">20 LPA</Badge>
+
+            </div>
+            <div className='flex items-center gap-4 mt-4'>
+              <Button variant="outline" className="bg-purple-300">
+                Details
+              </Button>
+              <Button variant="outline" className="bg-purple-300">
+                Save for Later
+              </Button>
+
+            </div>
     </div>
   );
 }
