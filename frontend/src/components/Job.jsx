@@ -7,7 +7,7 @@ import { Badge } from './ui/badge';
 import { useNavigate } from 'react-router-dom';
 
 const jobid = "abcdef"
-function Job() {
+function Job({job}) {
   const navigate = useNavigate();
   return (
     <div className='p-5 rounded-md shadow-xl bg-white border border-gray-200'>
@@ -26,24 +26,24 @@ function Job() {
         </Button>
         
         <div>
-          <h1 className="text-lg font-bold">Company Name</h1> 
+          <h1 className="text-lg font-bold">{job?.company?.name}</h1> 
           <p className="text-gray-600">India</p> 
         </div>
       </div>
       
     
       <div className='mt-2'>
-        <h1 className="text-lg font-bold my-2">Job Title</h1> 
-        <p className="text-gray-600 text-sm">This is a brief description of the job role and responsibilities.</p> {/* Job description */}
+        <h1 className="text-lg font-bold my-2">{job?.title}</h1> 
+        <p className="text-gray-600 text-sm">{job?.description}</p>
       </div>
     <div className='flex items-center gap-3 mt-4'>
-                <Badge className={'text-red-900 font-bold'} variant="primary">10 Postions</Badge>
-                <Badge className={'text-blue-900 font-bold'}  variant="primary">Part time</Badge>
-                <Badge className={'text-violet-900 font-bold'}  variant="primary">20 LPA</Badge>
+                <Badge className={'text-red-900 font-bold'} variant="primary">{job?.position} Postions</Badge>
+                <Badge className={'text-blue-900 font-bold'}  variant="primary">{job?.jobtype}</Badge>
+                <Badge className={'text-violet-900 font-bold'}  variant="primary">{job?.salary}</Badge>
 
             </div>
             <div className='flex items-center gap-4 mt-4'>
-              <Button onClick={()=>navigate(`/description/${jobid}`)} variant="outline" className="bg-purple-300" >
+              <Button onClick={()=>navigate(`/description/${job?._id}`)} variant="outline" className="bg-purple-300" >
                 Details
               </Button>
               <Button variant="outline" className="bg-purple-300">

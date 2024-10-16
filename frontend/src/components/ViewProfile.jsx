@@ -61,7 +61,7 @@ function ViewProfile() {
              <div className='grid w-full max-w-sm items-center gap-1.5 '>
                 <Label className="text-md font-semibold">Resume</Label>
                 {
-                    hasresume?<a target ='blank' href='https://google.com' className='text-red-500'>Click here</a>
+                    hasresume?<a target ='blank' href={user?.profile?.resume} className='text-red-500  w-full hover:underline cursor-pointer'>{user?.profile?.resumeoriginalname}</a>
                 :
                 <span>NA</span>}
              </div>

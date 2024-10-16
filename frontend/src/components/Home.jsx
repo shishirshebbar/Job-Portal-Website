@@ -4,8 +4,10 @@ import Description from '@/components/Description'
 import Category from './Category'
 import LatestJobs from './LatestJobs'
 import Footer from './structure/Footer'
+import Getalljobshooks from '@/hooks/Getalljobshooks'
 
 function Home() {
+  Getalljobshooks();
   return (
     <div><Navbar/>
     <Description/>

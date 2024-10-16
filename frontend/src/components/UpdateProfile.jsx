@@ -37,6 +37,7 @@ const UpdateProfile = ({open,setopen})=> {
             formdata.append("file",input.file);
         }
         try{
+            setloading(true);
             const res= await axios.post(`${API_END_POINT}/profile/update`,formdata,{
                 headers:{
                     'Content-Type':'multipart/form-data'
@@ -52,6 +53,8 @@ const UpdateProfile = ({open,setopen})=> {
 
             console.log(error);
             toast.error(error.response.data.message)
+        }finally{
+            setloading(false);
         }
         setopen(false);
         console.log(input);
@@ -129,6 +132,7 @@ const UpdateProfile = ({open,setopen})=> {
                         id="file"
                         name = "file"
                         type="file"
+
                         onChange={filechange}
                         accept="application/pdf"
                         className="col-span-3 border border-black"
