@@ -9,6 +9,9 @@ import Jobs from './components/Jobs'
 import Browse from './components/Browse'
 import ViewProfile from './components/ViewProfile'
 import JobDescription from './components/JobDescription'
+import Companies from './components/admin/Companies'
+import CreateCompany from './components/admin/CreateCompany'
+import CompanySetup from './components/admin/CompanySetup'
 
 
 
@@ -41,6 +44,18 @@ const approuter= createBrowserRouter([
   {
     path:'/profile',
     element:<ViewProfile/>
+  },
+  {
+    path:"/admin/companies",
+    element:<Companies/>
+  },
+  {
+    path:"/admin/companies/create",
+    element:<CreateCompany/>
+  },
+  {
+    path:"/admin/companies/:id",
+    element:<CompanySetup/>
   }
 ])
 function App() {

@@ -72,6 +72,7 @@ export const getcompanybyid = async(req,res)=>{
 export const updatecomapnyprofile = async(req,res)=>{
     try{
         const {name,description,website,location}=req.body;
+        console.log(name,description,website,location);
         const file = req.file;
         const update = {name,description,website,location};
         const company = await Company.findByIdAndUpdate(req.params.id,update,{new:true});
