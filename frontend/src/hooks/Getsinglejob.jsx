@@ -9,7 +9,7 @@ function Getsinglejob(jobid) {
     useEffect(()=>{
         const fetchsinglejob = async()=>{
             try{
-                const res = await axios(`${JOB_END_POINT}/get/${jobid}`,{withCredentials:true});
+                const res = await axios.get(`${JOB_END_POINT}/get/${jobid}`,{withCredentials:true});
                 if(res.data.success){
                     dispatch(setsinglejob(res.data.jobs));
                 }

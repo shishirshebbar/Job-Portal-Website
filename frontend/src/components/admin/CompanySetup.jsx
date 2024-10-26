@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Navbar from '../structure/Navbar'
 import { Button } from '../ui/button'
 import { ArrowLeft, Loader2 } from 'lucide-react'
@@ -8,9 +8,13 @@ import { COMPANY_END_POINT } from '@/utilities/constants'
 import { useNavigate, useParams } from 'react-router-dom'
 import { toast } from 'sonner'
 import axios from 'axios'
+import { useSelector } from 'react-redux'
+import Getcompanybyidhook from '@/hooks/Getcompanybyidhook'
 
 
 function CompanySetup() {
+    const params = useParams();
+    Getcompanybyidhook(params.id);
     const [input,setinput] = useState({
         name:"",
         description:"",
@@ -19,9 +23,9 @@ function CompanySetup() {
         file:null
 
     });
-
+    const {singlecompany} = useSelector(store=>store.company)
     const [loading,setloading]  = useState(false);
-    const params= useParams();
+    
     const navigate = useNavigate();
     const eventchangehandler=(e)=>{
         setinput({...input,[e.target.name]:e.target.value});
@@ -62,6 +66,15 @@ function CompanySetup() {
             setloading(false)
         }
     }
+    useEffect(()=>{
+        setinput({
+        name:singlecompany.name||"",
+        description:singlecompany.description||"",
+        website:singlecompany.website||"",
+        location:singlecompany.location||"",
+        file:singlecompany.file||null
+        })
+    },[singlecompany])
   return (
     <div>
         <Navbar/>

@@ -12,6 +12,8 @@ import JobDescription from './components/JobDescription'
 import Companies from './components/admin/Companies'
 import CreateCompany from './components/admin/CreateCompany'
 import CompanySetup from './components/admin/CompanySetup'
+import Adminjobs from './components/admin/Adminjobs'
+import AddNewJob from './components/admin/AddNewJob'
 
 
 
@@ -56,6 +58,14 @@ const approuter= createBrowserRouter([
   {
     path:"/admin/companies/:id",
     element:<CompanySetup/>
+  },
+  {
+    path:"/admin/jobs",
+    element:<Adminjobs/>
+  },
+  {
+    path:"/admin/jobs/create",
+    element:<AddNewJob/>
   }
 ])
 function App() {

@@ -1,18 +1,18 @@
-import { setalljobs } from '@/redux/jobslice';
+import { setalladminjobs} from '@/redux/jobslice';
 import { JOB_END_POINT } from '@/utilities/constants';
 import axios from 'axios';
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 
-function Getalljobshooks() {
+function GetAdminJobshook() {
   
     const dispatch = useDispatch();
     useEffect(()=>{
         const fetchalljobs = async()=>{
             try{
-                const res = await axios.get(`${JOB_END_POINT}/get`,{withCredentials:true});
+                const res = await axios.get(`${JOB_END_POINT}/getadminjobs`,{withCredentials:true});
                 if(res.data.success){
-                    dispatch(setalljobs(res.data.jobs));
+                    dispatch(setalladminjobs(res.data.jobs));
                 }
 
             }catch(error){
@@ -25,4 +25,4 @@ function Getalljobshooks() {
   
 }
 
-export default Getalljobshooks
+export default GetAdminJobshook

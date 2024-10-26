@@ -1,35 +1,37 @@
 import React, { useEffect, useState } from 'react'
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '../ui/table'
-import { Avatar, AvatarImage } from '../ui/avatar'
-import logo from "../../assets/logo.jpg"
+
 import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover'
-import { Edit2, MoreHorizontal } from 'lucide-react'
+import { Edit2, Eye, MoreHorizontal } from 'lucide-react'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-function CompanyTable() {
-    const {companies,searchcompany} = useSelector(store=>store.company)
-    const [filter,setfilter]  = useState(companies);
+import store from '@/redux/store'
+function AdminJobsTable() {
+    const {alladminjobs,searchjob} = useSelector(store=>store.job);
+    
+    const [filter,setfilter]  = useState(alladminjobs);
     const navigate = useNavigate();
     useEffect(()=>{
-      const filtercompany= companies.length>=0&&companies.filter((company)=>{
-        if(!searchcompany){
+      const filterjobs= alladminjobs.length>=0&&alladminjobs.filter((job)=>{
+        if(!searchjob){
           return true;
         }
-        return company?.name?.toLowerCase().includes(searchcompany.toLowerCase())
+        return job?.title?.toLowerCase().includes(searchjob.toLowerCase()) || job?.company?.name.toLowerCase().includes(searchjob.toLowerCase());
+
       })
-        setfilter(filtercompany);
-    },[companies,searchcompany])
+        setfilter(filterjobs);
+    },[alladminjobs,searchjob])
   return (
     <div>
         <Table>
-            <TableCaption>Your registered comapnies</TableCaption>
+            <TableCaption>List of your recently posted jobs</TableCaption>
                 <TableHeader>
                     <TableRow>
                         <TableHead>
-                            Comapny Logo
+                            Comapny Name
                         </TableHead>
                         <TableHead>
-                            Name
+                            Role
                         </TableHead>
                         <TableHead>
                             Date
@@ -40,25 +42,26 @@ function CompanyTable() {
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                {filter?.map((company) => (
+                {filter?.map((job) => (
                     <tr>
-                         <TableCell>
-          <Avatar>
-            <AvatarImage src={company.logo} />
-          </Avatar>
-        </TableCell>
-        <TableCell>{company.name}</TableCell>
-        <TableCell>{company.createdAt.split("T")[0]}</TableCell>
+                         
+        <TableCell>{job?.company?.name}</TableCell>
+        <TableCell>{job?.title}</TableCell>
+        <TableCell>{job?.createdAt.split("T")[0]}</TableCell>
         <TableCell className="text-right cursor-pointer">
           <Popover>
             <PopoverTrigger>
               <MoreHorizontal />
             </PopoverTrigger>
             <PopoverContent className="w-32">
-              <div onClick={()=>navigate(`/admin/companies/${company._id}`)} className="flex items-center gap-2 w-fit cursor-pointer">
+              <div onClick={()=>navigate(`/admin/companies/${job._id}`)} className="flex items-center gap-2 w-fit cursor-pointer">
                 <Edit2 className="w-4" />
                 <span>Edit</span>
               </div>
+              <div onClick={()=> navigate(`/admin/jobs/${job._id}/applicants`)} className='flex items-center w-fit gap-2 cursor-pointer mt-2'>
+                <Eye className='w-4'/>
+                <span>Applicants</span>
+            </div>
             </PopoverContent>
           </Popover>
         </TableCell>
@@ -79,4 +82,4 @@ function CompanyTable() {
   )
 }
 
-export default CompanyTable
+export default AdminJobsTable
