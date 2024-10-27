@@ -8,6 +8,7 @@ import { setsinglejob } from '@/redux/jobslice';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'sonner';
+import Navbar from './structure/Navbar';
 function JobDescription() {
     const {singlejob} = useSelector(store=>store.job);
      const {user} = useSelector(store=>store.auth);
@@ -54,7 +55,10 @@ function JobDescription() {
 
     },[jobid,dispatch,user?._id])
   return (
-    <div className='max-w-7xl mx-auto my-10'>
+    
+<div>
+    <Navbar/>
+<div className='max-w-7xl mx-auto my-10'>
         <div className='flex items-center justify-between'>
             <div>
         <h2 className='font-bold text-3xl '>{singlejob?.title}</h2>
@@ -98,6 +102,7 @@ function JobDescription() {
 
             </div>     
     </div>
+</div>
   )
 }
 

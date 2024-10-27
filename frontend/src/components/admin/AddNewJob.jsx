@@ -6,9 +6,13 @@ import { Button } from '../ui/button'
 import { useSelector } from 'react-redux'
 import store from '@/redux/store'
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '../ui/select'
+import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
+import { JOB_END_POINT } from '@/utilities/constants'
+import { toast } from 'sonner'
+import { Loader2 } from 'lucide-react'
 
 
-const comapnylist = []
 
 function AddNewJob() {
     const [input,setinput]   = useState({
@@ -22,15 +26,51 @@ function AddNewJob() {
             position:0,
             companyid:""
     })
+    const [loading,setloading]=useState(false);
+    const navigate = useNavigate();
     const {companies}  = useSelector(store=>store.company);
     const changeevent =(e)=>{
         setinput({...input,[e.target.name]:e.target.value})
     }
+    const selectchange = (e) =>{
+      const selectedcompany = companies.find((company)=>company.name.toLowerCase()==e);
+      setinput({...input,companyid:selectedcompany._id})
+    }
+    const submithandler = async (e) => {
+      e.preventDefault();
+      console.log("Input data:", input);
+    
+      try {
+        setloading(true);
+        const res = await axios.post(`${JOB_END_POINT}/post`, input, {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          withCredentials: true,
+        });
+    
+        if (res.data.success) {
+          toast.success(res.data.message);
+          console.log("Submission successful");
+          navigate("/admin/jobs");
+        }
+      } catch (error) {
+        console.log("Error response:", error.response); // Additional logging
+        if (error.response && error.response.data) {
+          toast.error(error.response.data.message);
+        } else {
+          toast.error("An unexpected error occurred.");
+        }
+      } finally {
+        setloading(false);
+      }
+    };
+    
   return (
     <div>
         <Navbar/>
         <div className="flex items-center justify-center w-screen my-5">
-        <form action='' className='max-w-7xl border border-gray-200 shadow-lg p-10 rounded-lg'>
+        <form onSubmit={submithandler} className='max-w-7xl border border-gray-200 shadow-lg p-10 rounded-lg'>
         <div className="grid grid-cols-4 gap-5">
     <div>
       <Label className="text-l font-bold mx-14">Job Title</Label>
@@ -63,7 +103,7 @@ function AddNewJob() {
       />
     </div>
     <div>
-      <Label className="text-l font-bold mx-14">Salary</Label>
+      <Label className="text-l font-bold mx-14">Salary(in LPA)</Label>
       <Input
         value={input.salary}
         onChange={changeevent}
@@ -93,7 +133,7 @@ function AddNewJob() {
       />
     </div>
     <div>
-      <Label className="text-l font-bold mx-14">Experience Level</Label>
+      <Label className="text-l font-bold mx-14">Experience Level(in years)</Label>
       <Input
         value={input.experiencelevel}
         onChange={changeevent}
@@ -114,15 +154,17 @@ function AddNewJob() {
     </div>
     {
         companies.length>0&&(
-            <Select>
-            <SelectTrigger style={{ textAlign: 'left', width: '100%' }}>
-                <SelectValue placeholder="select" style={{ textAlign: 'left', overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis' }} />
+            <Select onValueChange={selectchange}>
+            <SelectTrigger className="w-[180px]">
+                <SelectValue placeholder="select a company"/>
             </SelectTrigger>
             <SelectContent>
                 <SelectGroup>
-                    {companies.map((company) => (
-                        <SelectItem key={company.name}>{company.name}</SelectItem>
-                    ))}
+                    {companies.map((company) => {
+                        return(
+                          <SelectItem value={company?.name?.toLowerCase()}>{company.name}</SelectItem>
+                        )
+                    })}
                 </SelectGroup>
             </SelectContent>
         </Select>
@@ -130,9 +172,12 @@ function AddNewJob() {
     }
     
   </div>
-  <Button className ="w-full mt-5">Post New Job</Button>
   {
-    comapnylist.length==0&&<p className='  mt-5  text-xs text-red-500 font-bold text-center'>Please register your company before adding a job.</p>
+  loading?<Button className="w-full my-4"><Loader2 className='mr-2 animate-spin h-4 w-4 '/>Please wait..</Button>
+  :<Button type="submit" className="w-full my-4 ">Add Job</Button>
+  }
+  {
+    companies.length==0&&<p className='  mt-5  text-xs text-red-500 font-bold text-center'>Please register your company before adding a job.</p>
   }
 </form>
 </div>
