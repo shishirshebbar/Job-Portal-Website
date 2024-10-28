@@ -18,7 +18,19 @@ function Job({job}) {
   return (
     <div className='p-5 rounded-md shadow-xl bg-white border border-gray-200'>
       <div className='flex items-center justify-between'>
-        <p className='text-sm text-gray-900'>{daysago(job?.createdAt)==0?"Today":`${daysago(job?.createdAt)}days ago`}</p>
+      <p className='text-sm text-gray-900'>
+      {daysago(job?.createdAt) > 0
+        ? `${daysago(job?.createdAt)} day${daysago(job?.createdAt) === 1 ? '' : 's'} ago`
+        : hoursago(job?.createdAt) > 0
+        ? `${hoursago(job?.createdAt)} hour${hoursago(job?.createdAt) === 1 ? '' : 's'} ago`
+        : minutesago(job?.createdAt) > 0
+        ? `${minutesago(job?.createdAt)} minute${minutesago(job?.createdAt) === 1 ? '' : 's'} ago`
+        : secondsago(job?.createdAt) > 0
+        ? `${secondsago(job?.createdAt)} second${secondsago(job?.createdAt) === 1 ? '' : 's'} ago`
+        : "Created just now"}
+    </p>
+
+
         <Button variant="outline" className="rounded-full" size="icon">
           <Bookmark />
         </Button>

@@ -10,11 +10,14 @@ import { Label } from './ui/label';
 import Appliedjobs from './Appliedjobs';
 import UpdateProfile from './UpdateProfile';
 import { useSelector } from 'react-redux';
+import Getallappliedjobshooks from '@/hooks/Getallappliedjobshooks';
 
 // const skillsarray = ["html","css","python","javascript","java","c++"]
 
 function ViewProfile() {
     const hasresume =true;
+    Getallappliedjobshooks();
+
     const [open,setopen] = useState(false);
     const {user} = useSelector(store=>store.auth);
   return (
@@ -24,7 +27,7 @@ function ViewProfile() {
         <div className='flex justify-between'>
         <div className='flex items-center gap-8'>        
             <Avatar className="h-24 w-24">
-            <AvatarImage src={logo} alt="profile"/>
+            <AvatarImage src={user?.profile?.profilephoto} alt="profile"/>
         </Avatar>    
         <div>
         <h1 className='font-semibold text-xl'>{user?.fullname}</h1>

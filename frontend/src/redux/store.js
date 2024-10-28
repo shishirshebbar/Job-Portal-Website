@@ -12,6 +12,7 @@ import {
 import storage from 'redux-persist/lib/storage'
 import authorizedslice from "./authorizedslice";
 import jobslice from "./jobslice"
+import applicationslice from "./applicationslice"
 import companyslice from "./companyslice"
 
 const persistConfig = {
@@ -23,7 +24,8 @@ const persistConfig = {
     
         auth:authorizedslice,
         job:jobslice,
-        company : companyslice
+        company : companyslice,
+        application:applicationslice
     
 })
   
