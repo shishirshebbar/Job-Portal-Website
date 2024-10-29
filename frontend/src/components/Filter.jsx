@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { RadioGroup, RadioGroupItem } from './ui/radio-group'
 import { Label } from './ui/label'
+import { useDispatch } from 'react-redux';
+import { setsearchrequest } from '@/redux/jobslice';
 const filterdata = [
   {
     filtertype:"Location",
@@ -14,12 +16,13 @@ const filterdata = [
   }
 ]
 function Filter() {
-  const {selected,setselected}  = useState("");
+  const [selected,setselected]  = useState("");
+  const dispatch = useDispatch();
   const changehandler=(value)=>{
     setselected(value);
   }
   useEffect(()=>{
-    console.log(selected);
+    dispatch(setsearchrequest(selected));
   },[selected])
   return (
     <div className='w-full bg-white p-3 rounded-md'><h1 className='font-bold text-lg'>Filter Jobs</h1>
@@ -31,11 +34,11 @@ function Filter() {
             <h1 className='font-bold text-lg'> {data.filtertype}</h1>
             {
               data.array.map((item,index)=>{
-                const item  = `id${index}-${index}`;
+                const itemid  = `id${index}-${index}`;
                 return (
                   <div className='flex items-center font-semibold space-x-2 my-2'>
-                    <RadioGroupItem value={item}/>
-                    <Label>{item}</Label>
+                    <RadioGroupItem value={item} id ={itemid}/>
+                    <Label htmlFor={itemid}>{item}</Label>
                   </div>
                 )
               })

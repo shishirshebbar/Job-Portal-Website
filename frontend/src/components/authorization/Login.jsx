@@ -49,6 +49,11 @@ function Login() {
         dispatch(setloading(false));
       }
   }
+  useEffect(()=>{
+    if(user){
+        navigate("/");
+    }
+},[])
   return (
     <div><Navbar/>
     <div className='flex items-center justify-center max-w-7xl mx-auto'>

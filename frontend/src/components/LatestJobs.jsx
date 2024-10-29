@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom'
 function LatestJobs() {
   
   const {alljobs}  = useSelector(store=>store.job)
-  const navigate = useNavigate();
+ 
   return (
     <div className='max-w-7xl mx-auto my-20'>
         <h1 className='text-3xl font-bold'><span className='text-blue-900'>Latest Job Openings</span></h1>
