@@ -11,6 +11,7 @@ import { toast } from 'sonner'
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
 import store from '@/redux/store';
+import { useEffect } from 'react'
 
 import { Loader2 } from 'lucide-react'
 import { setloading } from '@/redux/authorizedslice'
@@ -24,7 +25,7 @@ function Signup() {
         file:""
     })
     const navigate = useNavigate();
-    const {loading} = useSelector(store=>store.auth)
+    const {loading,user} = useSelector(store=>store.auth)
     const dispatch = useDispatch();
     const changeEventHandler = (e)=>{
         setinput({...input,[e.target.name]:e.target.value});

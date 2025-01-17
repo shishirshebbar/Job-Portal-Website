@@ -16,6 +16,7 @@ import Adminjobs from './components/admin/Adminjobs'
 import AddNewJob from './components/admin/AddNewJob'
 import Applicants from './components/admin/Applicants'
 import ProtectedRoutes from './components/admin/ProtectedRoutes'
+import ReferralPage from './components/ReferralPage'
 
 
 
@@ -76,7 +77,12 @@ const approuter= createBrowserRouter([
   {
     path:"/admin/jobs/:id/applicants",
     element:<ProtectedRoutes><Applicants/></ProtectedRoutes>
+  },
+  {
+    path:'/referral',
+    element:<ReferralPage/>
   }
+ 
 ])
 function App() {
 

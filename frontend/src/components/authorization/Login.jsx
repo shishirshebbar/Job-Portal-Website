@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { setloading, setuser } from '@/redux/authorizedslice'
 import store from '@/redux/store'
 import { Loader2 } from 'lucide-react'
+import { useEffect } from 'react'
 function Login() {
     const [input,setinput]  =useState({
         
@@ -24,7 +25,7 @@ function Login() {
     const changeEventHandler = (e)=>{
         setinput({...input,[e.target.name]:e.target.value});
     }
-    const {loading} = useSelector(store=>store.auth)
+    const {loading,user} = useSelector(store=>store.auth)
     const dispatch = useDispatch();
     const submithandler = async(e)=>{
       e.preventDefault();
